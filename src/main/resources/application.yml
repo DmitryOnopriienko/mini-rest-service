@@ -25,7 +25,3 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
-#      fail-on-empty-beans: false
-
-#server:
-#  port: 20080
