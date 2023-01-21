@@ -2,6 +2,7 @@ package com.restservice.profitsoftlec911.controllers;
 
 import com.restservice.profitsoftlec911.dto.RestResponse;
 import com.restservice.profitsoftlec911.dto.WaybillQueryDto;
+import com.restservice.profitsoftlec911.dto.WaybillSaveDto;
 import com.restservice.profitsoftlec911.entities.Waybill;
 import com.restservice.profitsoftlec911.services.WaybillService;
 import jakarta.validation.Valid;
@@ -46,7 +47,7 @@ public class WaybillController {
 
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
-  public RestResponse create(@Valid @RequestBody Waybill waybill) {
+  public RestResponse create(@Valid @RequestBody WaybillSaveDto waybill) {
     int id = waybillService.save(waybill);
     return new RestResponse(String.valueOf(id));
   }
@@ -57,7 +58,7 @@ public class WaybillController {
   }
 
   @PatchMapping("/{id}")
-  public void update(@PathVariable("id") int id, @Valid @RequestBody Waybill waybill) {
+  public void update(@PathVariable("id") int id, @Valid @RequestBody WaybillSaveDto waybill) {
     waybillService.update(id, waybill);
   }
 

@@ -9,9 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,17 +30,18 @@ public class Waybill {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @NotBlank(message = "type is required")
+//  @NotBlank(message = "type is required")
   private String type;
 
-  @DecimalMin(value = "0.00", message = "price must be provided")
+//  @NotNull
+//  @DecimalMin(value = "0.00", message = "price must be provided")
   private Double price;
 
-  @NotNull(message = "Date is required")
+//  @NotNull(message = "Date is required")
   private LocalDate date;
 
-  @ManyToOne
-  @JoinColumn(referencedColumnName = "id")
+  @ManyToOne(optional = false)
+  @JoinColumn(referencedColumnName = "id", nullable = false)
 //  @JsonManagedReference("customer")
   private Customer customer;
 
