@@ -1,5 +1,6 @@
 package com.restservice.profitsoftlec911.services;
 
+import com.restservice.profitsoftlec911.dto.CustomerSaveDto;
 import com.restservice.profitsoftlec911.entities.Customer;
 import com.restservice.profitsoftlec911.entities.Waybill;
 import com.restservice.profitsoftlec911.exceptions.NotFoundException;
@@ -32,7 +33,12 @@ public class CustomerService {
             .orElseThrow(() -> new NotFoundException("Customer with id %d not found".formatted(id)));
   }
 
-  public int save(Customer customer) {
+  public int save(CustomerSaveDto saveDto) {
+    Customer customer = new Customer();
+    customer.setName(saveDto.getName());
+    customer.setSurname(saveDto.getSurname());
+    customer.setPatronymic(saveDto.getPatronymic());
+
     customerRepository.save(customer);
     return customer.getId();
   }

@@ -1,5 +1,6 @@
 package com.restservice.profitsoftlec911.controllers;
 
+import com.restservice.profitsoftlec911.dto.CustomerSaveDto;
 import com.restservice.profitsoftlec911.dto.RestResponse;
 import com.restservice.profitsoftlec911.entities.Customer;
 import com.restservice.profitsoftlec911.entities.Waybill;
@@ -53,7 +54,7 @@ public class CustomerController {
 
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
-  public RestResponse createCustomer(@Valid @RequestBody Customer customer) {
+  public RestResponse createCustomer(@Valid @RequestBody CustomerSaveDto customer) {
     int id = customerService.save(customer);
     return new RestResponse(String.valueOf(id));
   }
