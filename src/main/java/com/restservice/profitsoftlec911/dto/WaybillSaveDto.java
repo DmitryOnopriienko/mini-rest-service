@@ -22,14 +22,14 @@ public class WaybillSaveDto {
   @NotBlank(message = "type is required")
   private String type;
 
-  @NotNull
+  @NotNull(message = "price must be provided")
   @DecimalMin(value = "0.00", message = "price must be provided")
   private Double price;
 
   @NotNull(message = "Date is required")
   private LocalDate date;
 
-  @NotNull
+  @NotNull(message = "customerId must be provided")
   @Min(value = 1, message = "customerId must be valid")
   private Integer customerId;
 

@@ -58,8 +58,9 @@ public class WaybillController {
   }
 
   @PatchMapping("/{id}")
-  public void update(@PathVariable("id") int id, @Valid @RequestBody WaybillSaveDto waybill) {
+  public RestResponse update(@PathVariable("id") int id, @Valid @RequestBody WaybillSaveDto waybill) {
     waybillService.update(id, waybill);
+    return new RestResponse("OK");
   }
 
   @PostMapping("/_search")
