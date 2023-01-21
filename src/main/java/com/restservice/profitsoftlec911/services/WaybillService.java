@@ -28,8 +28,9 @@ public class WaybillService {
             .orElseThrow(() -> new NotFoundException("Waybill with id %d not found".formatted(id)));
   }
 
-  public void save(Waybill waybill) {
+  public int save(Waybill waybill) {
     waybillRepository.save(waybill);
+    return waybill.getId();
   }
 
   public void update(int id, Waybill newWaybillInfo) {

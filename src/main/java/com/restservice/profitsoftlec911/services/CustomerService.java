@@ -32,8 +32,9 @@ public class CustomerService {
             .orElseThrow(() -> new NotFoundException("Customer with id %d not found".formatted(id)));
   }
 
-  public void save(Customer customer) {
+  public int save(Customer customer) {
     customerRepository.save(customer);
+    return customer.getId();
   }
 
   public Page<Customer> getAll(Pageable pageable) {

@@ -1,5 +1,6 @@
 package com.restservice.profitsoftlec911.controllers;
 
+import com.restservice.profitsoftlec911.dto.RestResponse;
 import com.restservice.profitsoftlec911.dto.WaybillQueryDto;
 import com.restservice.profitsoftlec911.entities.Waybill;
 import com.restservice.profitsoftlec911.services.WaybillService;
@@ -45,8 +46,9 @@ public class WaybillController {
 
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
-  public void create(@Valid @RequestBody Waybill waybill) {
-    waybillService.save(waybill);
+  public RestResponse create(@Valid @RequestBody Waybill waybill) {
+    int id = waybillService.save(waybill);
+    return new RestResponse(String.valueOf(id));
   }
 
   @DeleteMapping("/{id}")
