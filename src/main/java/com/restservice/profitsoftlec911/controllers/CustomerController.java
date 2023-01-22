@@ -4,7 +4,7 @@ import com.restservice.profitsoftlec911.dto.CustomerSaveDto;
 import com.restservice.profitsoftlec911.dto.RestResponse;
 import com.restservice.profitsoftlec911.entities.Customer;
 import com.restservice.profitsoftlec911.entities.Waybill;
-import com.restservice.profitsoftlec911.services.CustomerService;
+import com.restservice.profitsoftlec911.services.interfaces.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

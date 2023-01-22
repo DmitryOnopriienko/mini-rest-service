@@ -7,20 +7,21 @@ import com.restservice.profitsoftlec911.entities.Waybill;
 import com.restservice.profitsoftlec911.exceptions.NotFoundException;
 import com.restservice.profitsoftlec911.repositories.CustomerRepository;
 import com.restservice.profitsoftlec911.repositories.WaybillRepository;
+import com.restservice.profitsoftlec911.services.interfaces.WaybillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WaybillService {
+public class WaybillServiceImpl implements WaybillService {
 
   private final WaybillRepository waybillRepository;
 
   private final CustomerRepository customerRepository;
 
   @Autowired
-  public WaybillService(WaybillRepository waybillRepository, CustomerRepository customerRepository) {
+  public WaybillServiceImpl(WaybillRepository waybillRepository, CustomerRepository customerRepository) {
     this.waybillRepository = waybillRepository;
     this.customerRepository = customerRepository;
   }

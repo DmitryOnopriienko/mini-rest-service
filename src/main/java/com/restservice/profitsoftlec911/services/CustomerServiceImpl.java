@@ -6,6 +6,7 @@ import com.restservice.profitsoftlec911.entities.Waybill;
 import com.restservice.profitsoftlec911.exceptions.NotFoundException;
 import com.restservice.profitsoftlec911.repositories.CustomerRepository;
 import com.restservice.profitsoftlec911.repositories.WaybillRepository;
+import com.restservice.profitsoftlec911.services.interfaces.CustomerService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 @Getter
 @Setter
-public class CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
   private final CustomerRepository customerRepository;
 
   private final WaybillRepository waybillRepository;
 
   @Autowired
-  public CustomerService(CustomerRepository customerRepository, WaybillRepository waybillRepository) {
+  public CustomerServiceImpl(CustomerRepository customerRepository, WaybillRepository waybillRepository) {
     this.customerRepository = customerRepository;
     this.waybillRepository = waybillRepository;
   }
