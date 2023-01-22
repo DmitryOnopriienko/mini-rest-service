@@ -44,6 +44,10 @@ public class WaybillControllerTest {
   @Autowired
   private ObjectMapper objectMapper;
 
+  public static final String WAYBILLS = "/waybills";
+
+  public static final String WAYBILL_CREATE = WAYBILLS + "/create";
+
   int addCustomer() {
     Customer customer = new Customer();
     customer.setName("TestCustomer");
@@ -63,7 +67,7 @@ public class WaybillControllerTest {
   void testCreateInvalidWaybills() throws Exception {
     addCustomer();
 
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
             .contentType(MediaType.APPLICATION_JSON)
             .content("""
                     {
@@ -74,7 +78,7 @@ public class WaybillControllerTest {
                     """))
             .andExpect(status().isBadRequest());
 
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                     {
@@ -85,7 +89,7 @@ public class WaybillControllerTest {
                     """))
             .andExpect(status().isBadRequest());
 
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                     {
@@ -96,7 +100,7 @@ public class WaybillControllerTest {
                     """))
             .andExpect(status().isBadRequest());
 
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                     {
@@ -107,7 +111,7 @@ public class WaybillControllerTest {
                     """))
             .andExpect(status().isBadRequest());
 
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                     {
@@ -123,7 +127,7 @@ public class WaybillControllerTest {
   @Test
   void testCreateWaybillWithNonExistentCustomer() throws Exception {
     int maxCustomerId = addCustomer();
-    mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                     {
@@ -144,7 +148,7 @@ public class WaybillControllerTest {
     String price = "70.99";
     String date = "2022-07-07";
 
-    MvcResult result = mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    MvcResult result = mvc.perform(post(WAYBILL_CREATE)
             .contentType(MediaType.APPLICATION_JSON)
             .content("""
                     {
@@ -169,7 +173,7 @@ public class WaybillControllerTest {
     assertEquals(date, waybill.getDate().toString());
     assertEquals(customerId, waybill.getCustomer().getId());
 
-    mvc.perform(get(WaybillControllerLinksConstants.WAYBILLS + "/%d".formatted(id))
+    mvc.perform(get(WAYBILLS + "/%d".formatted(id))
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
   }
@@ -179,7 +183,7 @@ public class WaybillControllerTest {
     int customerId = addCustomer();
 
     for (int i = 0; i < 5; i++) {
-      mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+      mvc.perform(post(WAYBILL_CREATE)
                       .contentType(MediaType.APPLICATION_JSON)
                       .content("""
                               {
@@ -193,7 +197,7 @@ public class WaybillControllerTest {
     }
 
     for (int i = 0; i < 2; i++) {
-      mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+      mvc.perform(post(WAYBILL_CREATE)
                       .contentType(MediaType.APPLICATION_JSON)
                       .content("""
                               {
@@ -214,7 +218,7 @@ public class WaybillControllerTest {
   void testAddAndDelete() throws Exception {
     int customerId = addCustomer();
 
-    MvcResult result = mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    MvcResult result = mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                               {
@@ -230,7 +234,7 @@ public class WaybillControllerTest {
     RestResponse response = parseResponse(result, RestResponse.class);
     int id = Integer.parseInt(response.getResult());
 
-    mvc.perform(delete(WaybillControllerLinksConstants.WAYBILLS + "/%d".formatted(id))
+    mvc.perform(delete(WAYBILLS + "/%d".formatted(id))
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
   }
@@ -239,7 +243,7 @@ public class WaybillControllerTest {
   void testUpdate() throws Exception {
     int customerId = addCustomer();
 
-    MvcResult result = mvc.perform(post(WaybillControllerLinksConstants.WAYBILL_CREATE)
+    MvcResult result = mvc.perform(post(WAYBILL_CREATE)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                               {
@@ -256,7 +260,7 @@ public class WaybillControllerTest {
     int id = Integer.parseInt(response.getResult());
 
     mvc.perform(
-            get(WaybillControllerLinksConstants.WAYBILLS + "/%d".formatted(id))
+            get(WAYBILLS + "/%d".formatted(id))
                     .contentType(MediaType.APPLICATION_JSON)
             )
             .andExpect(status().isOk());
@@ -267,7 +271,7 @@ public class WaybillControllerTest {
     String newPrice = "1.99";
     String newType = "sea-shipping";
 
-    mvc.perform(patch(WaybillControllerLinksConstants.WAYBILLS + "/%d".formatted(id))
+    mvc.perform(patch(WAYBILLS + "/%d".formatted(id))
             .contentType(MediaType.APPLICATION_JSON)
             .content("""
                     {
