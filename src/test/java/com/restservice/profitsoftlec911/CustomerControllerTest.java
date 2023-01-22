@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -114,6 +115,40 @@ public class CustomerControllerTest {
     mvc.perform(get(CUSTOMERS_URI + "/%d".formatted(id))
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
+  }
+
+  @Test
+  void testAdd3ValidAnd1Invalid() throws Exception {
+    String name = "Dmitry";
+    String surname = "Onopriienko";
+    String patronymic = "Olehovich";
+    String json = """
+            {
+                "name": "%s",
+                "surname": "%s",
+                "patronymic": "%s"
+            }
+            """.formatted(name, surname, patronymic);
+    String invalidJson = """
+            {
+              "name": "Nick"
+            }
+            """;
+    for (int i = 0; i < 3; i++) {
+      mvc.perform(post(CUSTOMERS_CREATE_URI)
+                      .contentType(MediaType.APPLICATION_JSON)
+                      .content(json))
+              .andExpect(status().isCreated())
+              .andReturn();
+    }
+    mvc.perform(post(CUSTOMERS_CREATE_URI)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(invalidJson))
+            .andExpect(status().isBadRequest())
+            .andReturn();
+
+    List<Customer> customers = customerRepository.findAll();
+    assertEquals(3, customers.size());
   }
 
   private <T>T parseResponse(MvcResult mvcResult, Class<T> c) {
