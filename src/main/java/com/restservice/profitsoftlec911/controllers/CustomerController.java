@@ -47,9 +47,8 @@ public class CustomerController {
   public Page<Waybill> getWaybillsOfCustomer(@PathVariable("id") int id,
                                              @RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "3") int size) {
-    Customer customer = customerService.getById(id);
     Pageable pageable = PageRequest.of(page, size);
-    return customerService.getWaybillsOfCustomer(customer.getId(), pageable);
+    return customerService.getWaybillsOfCustomer(id, pageable);
   }
 
   @PostMapping("/create")

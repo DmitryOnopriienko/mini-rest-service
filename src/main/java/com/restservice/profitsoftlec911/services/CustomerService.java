@@ -48,6 +48,9 @@ public class CustomerService {
   }
 
   public Page<Waybill> getWaybillsOfCustomer(int id, Pageable pageable) {
+    if (!customerRepository.existsById(id)) {
+      throw new NotFoundException("Customer with id %d not found".formatted(id));
+    }
     return waybillRepository.findByCustomerId(id, pageable);
   }
 }
