@@ -12,7 +12,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -21,7 +20,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = "customer")
 @JsonSerialize
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Waybill {
@@ -30,19 +28,14 @@ public class Waybill {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-//  @NotBlank(message = "type is required")
   private String type;
 
-//  @NotNull
-//  @DecimalMin(value = "0.00", message = "price must be provided")
   private Double price;
 
-//  @NotNull(message = "Date is required")
   private LocalDate date;
 
   @ManyToOne(optional = false)
   @JoinColumn(referencedColumnName = "id", nullable = false)
-//  @JsonManagedReference("customer")
   private Customer customer;
 
 }

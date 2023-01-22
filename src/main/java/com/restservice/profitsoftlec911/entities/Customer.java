@@ -32,9 +32,4 @@ public class Customer {
 
   private String patronymic;
 
-//  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-////  @JsonBackReference("waybills")
-//  @JsonIgnore
-//  List<Waybill> waybills;
-
 }
