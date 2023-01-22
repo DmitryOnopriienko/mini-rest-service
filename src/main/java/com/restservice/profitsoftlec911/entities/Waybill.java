@@ -16,7 +16,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "waybills")
+@Table(name = "waybill")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class Waybill {
   private LocalDate date;
 
   @ManyToOne(optional = false)
-  @JoinColumn(referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
   private Customer customer;
 
 }
