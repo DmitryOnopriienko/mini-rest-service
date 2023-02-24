@@ -62,7 +62,7 @@ public class CustomerController {
 
   @PatchMapping("/{id}")
   public void updateCustomer(@PathVariable("id") int id,
-                             @RequestBody CustomerSaveDto customer) {
+                             @RequestBody @Valid CustomerSaveDto customer) {
     customerService.update(customer, id);
   }
 

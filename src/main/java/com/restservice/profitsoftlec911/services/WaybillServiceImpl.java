@@ -60,6 +60,9 @@ public class WaybillServiceImpl implements WaybillService {
   }
 
   public void delete(int id) {
+    if (!waybillRepository.existsById(id)) {
+      throw new NotFoundException("Waybill with id %d not found".formatted(id));
+    }
     waybillRepository.deleteById(id);
   }
 

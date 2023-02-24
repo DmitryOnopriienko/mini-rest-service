@@ -24,7 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
   private final WaybillRepository waybillRepository;
 
   @Autowired
-  public CustomerServiceImpl(CustomerRepository customerRepository, WaybillRepository waybillRepository) {
+  public CustomerServiceImpl(CustomerRepository customerRepository,
+                             WaybillRepository waybillRepository) {
     this.customerRepository = customerRepository;
     this.waybillRepository = waybillRepository;
   }
@@ -57,6 +58,9 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public void delete(int id) {
+    if (!customerRepository.existsById(id)) {
+      throw new NotFoundException("Customer with id %d not found".formatted(id));
+    }
     customerRepository.deleteById(id);
   }
 
