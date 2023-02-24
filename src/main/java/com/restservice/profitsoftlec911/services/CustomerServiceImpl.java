@@ -54,4 +54,23 @@ public class CustomerServiceImpl implements CustomerService {
     }
     return waybillRepository.findByCustomerId(id, pageable);
   }
+
+  @Override
+  public void delete(int id) {
+    customerRepository.deleteById(id);
+  }
+
+  @Override
+  public void update(CustomerSaveDto customerData, int id) {
+    Customer customer = getById(id);
+    setCustomerData(customer, customerData);
+  }
+
+  private void setCustomerData(Customer customer, CustomerSaveDto customerData) {
+    customer.setName(customerData.getName());
+    customer.setSurname(customerData.getSurname());
+    customer.setPatronymic(customerData.getPatronymic());
+
+    customerRepository.save(customer);
+  }
 }

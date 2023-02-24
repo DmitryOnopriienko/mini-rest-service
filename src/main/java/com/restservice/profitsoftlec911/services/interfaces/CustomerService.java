@@ -12,7 +12,11 @@ public interface CustomerService {
 
   int save(CustomerSaveDto saveDto);
 
+  void update(CustomerSaveDto customer, int id);
+
   Page<Customer> getAll(Pageable pageable);
 
   Page<Waybill> getWaybillsOfCustomer(int id, Pageable pageable);
+
+  void delete(int id);
 }
